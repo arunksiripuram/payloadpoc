@@ -11,6 +11,9 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Cards } from './collections/Cards' // Import the cards collection
 
+import { Footer } from './globals/Footer' // Import the cards collection
+import { Header } from './globals/Header' // Import the cards collection
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -22,7 +25,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Cards],
-  globals: [],
+  globals: [Header, Footer],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
