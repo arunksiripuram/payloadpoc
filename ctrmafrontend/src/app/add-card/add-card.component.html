@@ -1,0 +1,27 @@
+<div class="card-form-container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="cardForm">
+      <h2>Add New Card</h2>
+  
+      <!-- Dynamically render form fields based on the metadata -->
+      <div *ngFor="let field of fieldsMetadata">
+        <label [for]="field.name">{{ field.name | titlecase }}</label>
+  
+        <ng-container [ngSwitch]="field.type">
+          <input *ngSwitchCase="'text'" type="text" [id]="field.name" [formControlName]="field.name" />
+          <select *ngSwitchCase="'select'" [id]="field.name" [formControlName]="field.name">
+            <option value="">Select...</option>
+            <!-- You can populate options dynamically if needed -->
+          </select>
+          <input *ngSwitchCase="'checkbox'" type="checkbox" [id]="field.name" [formControlName]="field.name" />
+        </ng-container>
+  
+        <!-- Display validation error message -->
+        <div *ngIf="cardForm.get(field.name)?.invalid && cardForm.get(field.name)?.touched">
+          <small *ngIf="cardForm.get(field.name)?.hasError('required')">This field is required.</small>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="cardForm.invalid">Add New Card</button>
+    </form>
+  </div>
+  
