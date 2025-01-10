@@ -13,7 +13,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    cards: Card;
+    pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -22,7 +22,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    cards: CardsSelect<false> | CardsSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -103,9 +103,9 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cards".
+ * via the `definition` "pages".
  */
-export interface Card {
+export interface Page {
   id: string;
   cardHolder: string;
   cardType: 'Visa' | 'MasterCard' | 'American Express';
@@ -140,8 +140,8 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'cards';
-        value: string | Card;
+        relationTo: 'pages';
+        value: string | Page;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -220,9 +220,9 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cards_select".
+ * via the `definition` "pages_select".
  */
-export interface CardsSelect<T extends boolean = true> {
+export interface PagesSelect<T extends boolean = true> {
   cardHolder?: T;
   cardType?: T;
   cardNumber?: T;
